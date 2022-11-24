@@ -20,7 +20,7 @@ namespace RestWithASPNETUdemy.Controllers
         }
 
         [HttpGet("sum/{firstNumber}/{secondsNumber}")]
-        public IActionResult Get(string firstNumber, string secondsNumber)
+        public IActionResult Sum(string firstNumber, string secondsNumber)
         {
             if(IsNumeric(firstNumber) & IsNumeric(secondsNumber))
             {
@@ -31,7 +31,7 @@ namespace RestWithASPNETUdemy.Controllers
         }
 
         [HttpGet("sub/{firstNumber}/{secondsNumber}")]
-        public IActionResult Get(string firstNumber, string secondsNumber)
+        public IActionResult Sub(string firstNumber, string secondsNumber)
         {
             if (IsNumeric(firstNumber) & IsNumeric(secondsNumber))
             {
@@ -41,35 +41,48 @@ namespace RestWithASPNETUdemy.Controllers
             return BadRequest("invalid input");
         }
 
-        //public IActionResult Get(string firstNumber, string secondsNumber)
-        //{
-        //    if (IsNumeric(firstNumber) & IsNumeric(secondsNumber))
-        //    {
-        //        var sum = ConvertDecimal(firstNumber) + ConvertDecimal(secondsNumber);
-        //        return Ok(sum.ToString());
-        //    }
-        //    return BadRequest("invalid input");
-        //}
+        [HttpGet("mult/{firstNumber}/{secondsNumber}")]
+        public IActionResult Multiplication(string firstNumber, string secondsNumber)
+        {
+            if (IsNumeric(firstNumber) & IsNumeric(secondsNumber))
+            {
+                var sum = ConvertDecimal(firstNumber) * ConvertDecimal(secondsNumber);
+                return Ok(sum.ToString());
+            }
+            return BadRequest("invalid input");
+        }
 
-        //public IActionResult Get(string firstNumber, string secondsNumber)
-        //{
-        //    if (IsNumeric(firstNumber) & IsNumeric(secondsNumber))
-        //    {
-        //        var sum = ConvertDecimal(firstNumber) + ConvertDecimal(secondsNumber);
-        //        return Ok(sum.ToString());
-        //    }
-        //    return BadRequest("invalid input");
-        //}
+        [HttpGet("div/{firstNumber}/{secondsNumber}")]
 
-        //public IActionResult Get(string firstNumber, string secondsNumber)
-        //{
-        //    if (IsNumeric(firstNumber) & IsNumeric(secondsNumber))
-        //    {
-        //        var sum = ConvertDecimal(firstNumber) + ConvertDecimal(secondsNumber);
-        //        return Ok(sum.ToString());
-        //    }
-        //    return BadRequest("invalid input");
-        //}
+        public IActionResult Division(string firstNumber, string secondsNumber)
+        {
+            if (IsNumeric(firstNumber) & IsNumeric(secondsNumber))
+            {
+                var sum = ConvertDecimal(firstNumber) / ConvertDecimal(secondsNumber);
+                return Ok(sum.ToString());
+            }
+            return BadRequest("invalid input");
+        }
+
+        [HttpGet("med/{firstNumber}/{secondsNumber}")]
+        public IActionResult Media(string firstNumber, string secondsNumber)
+        {
+            if (IsNumeric(firstNumber) & IsNumeric(secondsNumber))
+            {
+                var sum = (ConvertDecimal(firstNumber) + ConvertDecimal(secondsNumber)) / 2;
+                return Ok(sum.ToString());
+            }
+            return BadRequest("invalid input");
+        }
+
+        [HttpGet("sqrt/{firstNumber}")]
+        public IActionResult Media(int firstNumber)
+        {
+                var sum = Math.Sqrt(firstNumber);
+                return Ok(sum.ToString());
+            
+            return BadRequest("invalid input");
+        }
 
         private bool IsNumeric(string strNumber)
         {
