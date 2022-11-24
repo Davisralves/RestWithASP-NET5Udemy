@@ -1,6 +1,6 @@
 using System;
 
-namespace RestWithASP_NET5Udemy
+namespace RestWithASPNETUdemy
 {
     public class WeatherForecast
     {
