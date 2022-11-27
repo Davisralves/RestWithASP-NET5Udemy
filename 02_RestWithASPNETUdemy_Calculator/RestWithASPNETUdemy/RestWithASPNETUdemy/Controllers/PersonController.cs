@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RestWithASPNETUdemy.Model;
+using RestWithASPNETUdemy.Services.Implemetations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,21 +15,44 @@ namespace RestWithASPNETUdemy.Controllers
     {
 
         private readonly ILogger<PersonController> _logger;
+        private IPersonService _personService;
 
-        public PersonController(ILogger<PersonController> logger)
+        public PersonController(ILogger<PersonController> logger, IPersonService personService)
         {
             _logger = logger;
+            _personService = personService;
         }
 
-        [HttpGet("sum/{firstNumber}/{secondsNumber}")]
-        public IActionResult Sum(string firstNumber, string secondsNumber)
+        [HttpGet]
+        public IActionResult Get()
         {
-            if(IsNumeric(firstNumber) & IsNumeric(secondsNumber))
-            {
-                var sum = ConvertDecimal(firstNumber) + ConvertDecimal(secondsNumber);
-                return Ok(sum.ToString());
-            }
-            return BadRequest("invalid input");
+            return Ok(_personService.FindAll());
+        }
+        [HttpGet("{id}")]
+        public IActionResult Get(long id)
+        {
+            var person = _personService.FindById(id);
+            if (person == null) return NotFound();
+            return Ok(person);
+        }
+        [HttpPost]
+        public IActionResult Post([FromBody] Person person)
+        {
+            if (person == null) return BadRequest();
+            return Ok(_personService.Create(person));
+        }
+        [HttpPost]
+        public IActionResult Put([FromBody] Person person)
+        {
+            if (person == null) return BadRequest();
+            return Ok(_personService.Update(person));
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(long id)
+        {
+            _personService.Delete(id);
+            return NoContent();
         }
     }
 }
