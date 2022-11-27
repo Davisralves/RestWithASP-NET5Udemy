@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace RestWithASPNETUdemy.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PersonController : ControllerBase
     {
 
@@ -41,7 +41,7 @@ namespace RestWithASPNETUdemy.Controllers
             if (person == null) return BadRequest();
             return Ok(_personService.Create(person));
         }
-        [HttpPost]
+        [HttpPut]
         public IActionResult Put([FromBody] Person person)
         {
             if (person == null) return BadRequest();

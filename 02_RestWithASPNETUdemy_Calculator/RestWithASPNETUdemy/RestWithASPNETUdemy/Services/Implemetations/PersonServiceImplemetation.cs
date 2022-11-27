@@ -27,6 +27,7 @@ namespace RestWithASPNETUdemy.Services.Implemetations
                 Person person = MockPerson(i);
                 persons.Add(person);
             }
+            return persons;
         }
 
 
