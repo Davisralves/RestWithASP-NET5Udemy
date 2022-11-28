@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace RestWithASPNETUdemy.Services.Implemetations
+namespace RestWithASPNETUdemy.Repository.Implemetations
 {
-    public class PersonServiceImplemetation : IPersonService
+    public class IPersonRepositoryImplemetation : IPersonRepository
     {
         private MysqlContext _context;
 
-        public PersonServiceImplemetation(MysqlContext context)
+        public IPersonRepositoryImplemetation(MysqlContext context)
         {
             _context = context;
         }
@@ -81,7 +81,7 @@ namespace RestWithASPNETUdemy.Services.Implemetations
 
 
 
-        private bool Exists(long id)
+        public bool Exists(long id)
         {
             return _context.Persons.Any(p => p.Id == id);
         }
