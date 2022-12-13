@@ -1,30 +1,35 @@
-﻿using RestWithASPNETUdemy.Model;
+﻿using Microsoft.EntityFrameworkCore.Internal;
+using RestWithASPNETUdemy.Model;
 using RestWithASPNETUdemy.Model.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 
-namespace RestWithASPNETUdemy.Repository.Implemetations
+namespace RestWithASPNETUdemy.Repository.Implementations
 {
-    public class IPersonRepositoryImplemetation : IPersonRepository
+    public class PersonRepositoryImplementation : IPersonRepository
     {
-        private MysqlContext _context;
 
-        public IPersonRepositoryImplemetation(MysqlContext context)
+        private MySQLContext _context;
+
+        public PersonRepositoryImplementation(MySQLContext context)
         {
             _context = context;
         }
+        
+        // Method responsible for returning all people,
         public List<Person> FindAll()
         {
             return _context.Persons.ToList();
         }
 
-
-        public Person FindById(long id)
+        // Method responsible for returning one person by ID
+        public Person FindByID(long id)
         {
-            return _context.Persons.SingleOrDefault(p => p.Id == id);
+            return _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
         }
+
+        // Method responsible to crete one new person
         public Person Create(Person person)
         {
             try
@@ -35,35 +40,39 @@ namespace RestWithASPNETUdemy.Repository.Implemetations
             catch (Exception)
             {
                 throw;
-
             }
             return person;
         }
 
+        // Method responsible for updating one person
         public Person Update(Person person)
         {
-            if (!Exists(person.Id)) return new Person();
+            // We check if the person exists in the database
+            // If it doesn't exist we return an empty person instance
+            if (!Exists(person.Id)) return null;
 
-            var result = _context.Persons.SingleOrDefault(p => p.Id == person.Id);
+            // Get the current status of the record in the database
+            var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
             if (result != null)
             {
                 try
                 {
+                    // set changes and save
                     _context.Entry(result).CurrentValues.SetValues(person);
                     _context.SaveChanges();
                 }
                 catch (Exception)
                 {
                     throw;
-
                 }
             }
             return person;
         }
 
+        // Method responsible for deleting a person from an ID
         public void Delete(long id)
         {
-            var result = _context.Persons.SingleOrDefault(p => p.Id == id);
+            var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
             if (result != null)
             {
                 try
@@ -74,16 +83,12 @@ namespace RestWithASPNETUdemy.Repository.Implemetations
                 catch (Exception)
                 {
                     throw;
-
                 }
             }
         }
-
-
-
         public bool Exists(long id)
         {
-            return _context.Persons.Any(p => p.Id == id);
+            return _context.Persons.Any(p => p.Id.Equals(id));
         }
     }
 }
