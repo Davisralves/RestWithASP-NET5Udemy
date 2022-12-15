@@ -24,6 +24,14 @@ namespace RestWithASPNETUdemy.Controllers
         {
             return Ok(_booksBusiness.FindAll());
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var book = _booksBusiness.FindByID(id);
+            if (book == null) return NotFound();
+            return Ok(book);
+        }
         [HttpPost]
         public IActionResult Post([FromBody] Books books)
         {
