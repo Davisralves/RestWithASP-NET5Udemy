@@ -69,7 +69,7 @@ namespace RestWithASPNETUdemy.Repository.Generic
         }
         public void Delete(long id)
         {
-            var result = dataset.SingleOrDefault(p => p.Id.Equals(id));
+            var result = dataset.SingleOrDefault(p => p.Id == id);
             if (result != null)
             {
                 try
