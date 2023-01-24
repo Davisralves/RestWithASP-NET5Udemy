@@ -40,8 +40,11 @@ namespace RestWithASPNETUdemy.Business.Implementations
             user.RefreshToken = refreshToken;
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(_configuration.DaysToExpiry);
 
+            _repository.RefreshUserInfo(user);
             DateTime createDate = DateTime.Now;
             DateTime expirationDate = createDate.AddMinutes(_configuration.Minutes);
+
+
             return new TokenVO(
                 true,
                 createDate.ToString(DATE_FORMAT),
