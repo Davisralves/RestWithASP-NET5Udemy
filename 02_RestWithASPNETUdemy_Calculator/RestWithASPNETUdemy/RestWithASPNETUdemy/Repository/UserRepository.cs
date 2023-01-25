@@ -28,9 +28,17 @@ namespace RestWithASPNETUdemy.Repository
             return _context.Users.SingleOrDefault(u => u.UserName == username);
         }
 
+        public bool RevokeToken(string userName)
+        {
+            var user = _context.Users.SingleOrDefault(u => u.UserName == userName);
+            if(user is null) return false;
+            user.RefreshToken= null;
+            _context.SaveChanges();
+            return true;
+        }
+
         public User RefreshUserInfo(User user)
         {
-            if (_context.Users.Any(u => u.Id.Equals(user.Id))) return null;
             var result = _context.Users.SingleOrDefault(u => u.Id.Equals(user.Id));
             if (result != null)
             {
@@ -54,6 +62,5 @@ namespace RestWithASPNETUdemy.Repository
             Byte[] hashedBytest = algorithm.ComputeHash(inputBytes);
             return BitConverter.ToString(hashedBytest);
         }
-
     }
 }
