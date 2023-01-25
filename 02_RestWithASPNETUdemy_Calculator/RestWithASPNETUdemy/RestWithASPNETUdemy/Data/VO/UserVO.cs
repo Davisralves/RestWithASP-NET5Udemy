@@ -1,8 +1,10 @@
-﻿namespace RestWithASPNETUdemy.Data.VO
+﻿using RestWithASPNETUdemy.Hypermedia.Abstract;
+
+namespace RestWithASPNETUdemy.Data.VO
 {
-    public interface UserVO
+    public class UserVO
     {
-        string Password { get; }
-        string UserName { get; set; }
+        public string Password { get; set; }
+        public string UserName { get; set; }
     }
 }
