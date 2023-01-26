@@ -29,6 +29,7 @@ namespace RestWithASPNETUdemy.Data.VO.Converter.Implementations
                 LastName = origin.LastName,
                 Address = origin.Address,
                 Gender = origin.Gender,
+                Enabled = origin.Enabled,
             };
             }
 
