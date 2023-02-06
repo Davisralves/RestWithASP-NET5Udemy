@@ -24,7 +24,7 @@ namespace RestWithASPNETUdemy.Controllers
             _booksBusiness = booksBusiness;
         }
         [HttpGet]
-        [TypeFilter(typeof(HyperMediaFilter))]
+        [TypeFilter(typeof(HyperMediaFilter))]  
         public IActionResult Get()
         {
             return Ok(_booksBusiness.FindAll());

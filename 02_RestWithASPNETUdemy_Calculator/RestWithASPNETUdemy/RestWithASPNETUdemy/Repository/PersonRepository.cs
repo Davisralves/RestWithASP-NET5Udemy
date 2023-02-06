@@ -3,6 +3,7 @@ using RestWithASPNETUdemy.Model;
 using RestWithASPNETUdemy.Model.Context;
 using RestWithASPNETUdemy.Repository.Generic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RestWithASPNETUdemy.Repository
@@ -26,6 +27,23 @@ namespace RestWithASPNETUdemy.Repository
                 catch (Exception) { throw; }
             }
             return user;
+        }
+
+        public List<Person> FindByName(string firstName, string lastName)
+        {
+            string[] names = { firstName, lastName };
+            if (SomeNotNull(names.ToList()))
+            {
+            return _context.Persons.Where(
+                p => p.FirstName.Contains(firstName) || p.LastName.Contains(lastName)).ToList();
+            }
+            return null;
+        }
+
+        private static bool SomeNotNull(List<string> names)
+        {
+            bool namesAreNotEmpty = names.Any(name => !string.IsNullOrWhiteSpace(name));
+            return namesAreNotEmpty;
         }
     }
 }
