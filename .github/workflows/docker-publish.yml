@@ -7,7 +7,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    environment: Docker_Container_registry
     steps:
       - uses: actions/checkout@v2
 
