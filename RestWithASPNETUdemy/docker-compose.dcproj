@@ -2,7 +2,7 @@
 <Project ToolsVersion="15.0" Sdk="Microsoft.Docker.Sdk">
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
-    <DockerTargetOS>Windows</DockerTargetOS>
+    <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>470e7ce9-2a39-490b-be9d-7c88c58594d2</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://{ServiceIPAddress}{ServicePort}</DockerServiceUrl>
